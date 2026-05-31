@@ -1,6 +1,6 @@
 # gpu_hse
 
-Отчет: report.pdf
+Отчет: report.pdf (скриншоты Grafana вложены)
 
 YAML файлы манифестов: 
 
