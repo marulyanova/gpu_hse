@@ -1,0 +1,34 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: nvidia-smi-test
+  namespace: gpu-lab
+spec:
+  ttlSecondsAfterFinished: 3600 
+  backoffLimit: 0   
+  template:
+    metadata:
+      labels:
+        app: nvidia-smi-test
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: smi
+          image: pytorch/pytorch:2.5.1-cuda12.4-cudnn9-runtime
+          imagePullPolicy: IfNotPresent
+          command: ["/bin/bash", "-c"]
+          args:
+            - |
+              echo "=== NVIDIA-SMI ==="
+              nvidia-smi
+              echo ""
+              echo "=== CUDA Runtime (nvcc) ==="
+              nvcc --version 2>/dev/null || echo "nvcc not found in this image"
+              echo ""
+              echo "=== PyTorch CUDA info ==="
+              python -c "import torch; print('PyTorch version:', torch.__version__); print('CUDA available:', torch.cuda.is_available()); print('CUDA version (compiled with):', torch.version.cuda); print('cuDNN version:', torch.backends.cudnn.version())" 2>/dev/null || echo "PyTorch not available"
+          resources:
+            limits:
+              nvidia.com/gpu: "1" 
+            requests:
+              nvidia.com/gpu: "1"

@@ -1,0 +1,215 @@
+{\rtf1\ansi\ansicpg1251\cocoartf2822
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Menlo-Bold;\f1\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red47\green180\blue29;\red0\green0\blue0;\red64\green11\blue217;
+}
+{\*\expandedcolortbl;;\cssrgb\c20241\c73898\c14950;\csgray\c0;\cssrgb\c32309\c18666\c88229;
+}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\b\fs22 \cf2 \CocoaLigature0 devchatay@epds73cmval2ppf6qhpm
+\f1\b0 \cf3 :
+\f0\b \cf4 ~
+\f1\b0 \cf3 $ kubectl logs -n gpu-lab -f job/torch-training-exclusive\
+Installing dependencies...\
+WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPSConnectionPool(host='pypi.org', port=443): Read timed out. (read timeout=15)")': /simple/transformers/\
+  WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPSConnectionPool(host='files.pythonhosted.org', port=443): Read timed out. (read timeout=15)")': /packages/09/c8/844d5518a6aeb4ffdc0cf0cae65ae13dbe5838306728c5c640b5a6e2a0c9/transformers-4.40.0-py3-none-any.whl.metadata\
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable.It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.\
+Starting training...\
+GPU: Tesla T4\
+TOTAL_GPU_MEMORY_GB: 14.56\
+cuda:0\
+\uc0\u1042 \u1089 \u1077 \u1075 \u1086  \u1087 \u1072 \u1088 \u1072 \u1084 \u1077 \u1090 \u1088 \u1086 \u1074 : 43026442\
+\uc0\u1054 \u1073 \u1091 \u1095 \u1072 \u1077 \u1084 \u1099 \u1093  \u1087 \u1072 \u1088 \u1072 \u1084 \u1077 \u1090 \u1088 \u1086 \u1074 : 43026442\
+Starting training...\
+TRAINING LOOP STARTED \'97 GPU LOAD EXPECTED NOW!\
+Step 2: time=0.010s, peak_mem=2.63GB\
+Step 4: time=0.923s, peak_mem=2.63GB\
+Step 6: time=0.006s, peak_mem=2.63GB\
+Step 8: time=0.006s, peak_mem=2.63GB\
+Step 10: time=0.877s, peak_mem=2.63GB\
+Step 12: time=0.883s, peak_mem=2.63GB\
+Step 14: time=0.892s, peak_mem=2.63GB\
+Step 16: time=0.006s, peak_mem=2.63GB\
+Step 18: time=0.904s, peak_mem=2.63GB\
+Step 20: time=0.891s, peak_mem=2.63GB\
+Step 22: time=0.101s, peak_mem=2.63GB\
+Step 24: time=0.901s, peak_mem=2.63GB\
+Step 26: time=0.006s, peak_mem=2.63GB\
+Step 28: time=0.898s, peak_mem=2.63GB\
+Step 30: time=0.910s, peak_mem=2.63GB\
+Step 32: time=0.906s, peak_mem=2.63GB\
+Step 34: time=0.914s, peak_mem=2.63GB\
+Step 36: time=0.006s, peak_mem=2.63GB\
+Step 38: time=0.920s, peak_mem=2.63GB\
+Step 40: time=0.924s, peak_mem=2.63GB\
+Step 42: time=0.912s, peak_mem=2.63GB\
+Step 44: time=0.917s, peak_mem=2.63GB\
+Step 46: time=0.007s, peak_mem=2.63GB\
+Step 48: time=0.931s, peak_mem=2.63GB\
+Step 50: time=0.107s, peak_mem=2.63GB\
+Step 52: time=0.913s, peak_mem=2.63GB\
+Step 54: time=0.914s, peak_mem=2.63GB\
+Step 56: time=0.003s, peak_mem=2.63GB\
+Step 58: time=0.926s, peak_mem=2.63GB\
+Step 60: time=0.906s, peak_mem=2.63GB\
+Step 62: time=0.923s, peak_mem=2.63GB\
+Step 64: time=0.110s, peak_mem=2.63GB\
+Step 66: time=0.006s, peak_mem=2.63GB\
+Step 68: time=0.934s, peak_mem=2.63GB\
+Step 70: time=0.935s, peak_mem=2.63GB\
+Step 72: time=0.931s, peak_mem=2.63GB\
+Step 74: time=0.951s, peak_mem=2.63GB\
+Step 76: time=0.006s, peak_mem=2.63GB\
+Step 78: time=0.006s, peak_mem=2.63GB\
+Step 80: time=0.940s, peak_mem=2.63GB\
+Step 82: time=0.924s, peak_mem=2.63GB\
+Step 84: time=0.946s, peak_mem=2.63GB\
+Step 86: time=0.006s, peak_mem=2.63GB\
+Step 88: time=0.951s, peak_mem=2.63GB\
+Step 90: time=0.961s, peak_mem=2.63GB\
+Step 92: time=0.102s, peak_mem=2.63GB\
+Step 94: time=0.948s, peak_mem=2.63GB\
+Step 96: time=0.006s, peak_mem=2.63GB\
+Step 98: time=0.948s, peak_mem=2.63GB\
+Step 100: time=0.952s, peak_mem=2.63GB\
+Step 102: time=0.954s, peak_mem=2.63GB\
+Step 104: time=0.945s, peak_mem=2.63GB\
+Step 106: time=0.006s, peak_mem=2.63GB\
+Step 108: time=0.965s, peak_mem=2.63GB\
+Step 110: time=0.952s, peak_mem=2.63GB\
+Step 112: time=0.955s, peak_mem=2.63GB\
+Step 114: time=0.918s, peak_mem=2.63GB\
+Step 116: time=0.006s, peak_mem=2.63GB\
+Step 118: time=0.965s, peak_mem=2.63GB\
+Step 120: time=0.109s, peak_mem=2.63GB\
+Step 122: time=0.970s, peak_mem=2.63GB\
+Step 124: time=0.984s, peak_mem=2.63GB\
+Step 126: time=0.003s, peak_mem=2.63GB\
+Step 128: time=0.981s, peak_mem=2.63GB\
+Step 130: time=0.967s, peak_mem=2.63GB\
+Step 132: time=0.969s, peak_mem=2.63GB\
+Step 134: time=0.112s, peak_mem=2.63GB\
+Step 136: time=0.006s, peak_mem=2.63GB\
+Step 138: time=0.970s, peak_mem=2.63GB\
+Step 140: time=0.982s, peak_mem=2.63GB\
+Step 142: time=0.976s, peak_mem=2.63GB\
+Step 144: time=0.981s, peak_mem=2.63GB\
+Step 146: time=0.006s, peak_mem=2.63GB\
+Step 148: time=0.006s, peak_mem=2.63GB\
+Step 150: time=0.991s, peak_mem=2.63GB\
+Step 152: time=0.994s, peak_mem=2.63GB\
+Step 154: time=0.983s, peak_mem=2.63GB\
+Step 156: time=0.006s, peak_mem=2.63GB\
+Step 158: time=0.995s, peak_mem=2.63GB\
+Step 160: time=0.991s, peak_mem=2.63GB\
+Step 162: time=0.111s, peak_mem=2.63GB\
+Step 164: time=0.988s, peak_mem=2.63GB\
+Step 166: time=0.006s, peak_mem=2.63GB\
+Step 168: time=0.998s, peak_mem=2.63GB\
+Step 170: time=0.987s, peak_mem=2.63GB\
+Step 172: time=0.983s, peak_mem=2.63GB\
+Step 174: time=0.998s, peak_mem=2.63GB\
+Step 176: time=0.006s, peak_mem=2.63GB\
+Step 178: time=1.003s, peak_mem=2.63GB\
+Step 180: time=0.995s, peak_mem=2.63GB\
+Step 182: time=0.994s, peak_mem=2.63GB\
+Step 184: time=0.996s, peak_mem=2.63GB\
+Step 186: time=0.006s, peak_mem=2.63GB\
+Step 188: time=1.014s, peak_mem=2.63GB\
+Step 190: time=0.114s, peak_mem=2.63GB\
+Step 192: time=1.004s, peak_mem=2.63GB\
+Step 194: time=1.011s, peak_mem=2.63GB\
+Step 196: time=0.003s, peak_mem=2.63GB\
+Step 198: time=1.010s, peak_mem=2.63GB\
+Step 200: time=1.017s, peak_mem=2.63GB\
+Step 202: time=0.984s, peak_mem=2.63GB\
+Step 204: time=0.113s, peak_mem=2.63GB\
+Step 206: time=0.006s, peak_mem=2.63GB\
+Step 208: time=1.018s, peak_mem=2.63GB\
+Step 210: time=0.970s, peak_mem=2.63GB\
+Step 212: time=0.977s, peak_mem=2.63GB\
+Step 214: time=1.001s, peak_mem=2.63GB\
+Step 216: time=0.006s, peak_mem=2.63GB\
+Step 218: time=0.006s, peak_mem=2.63GB\
+Step 220: time=1.004s, peak_mem=2.63GB\
+Step 222: time=1.007s, peak_mem=2.63GB\
+Step 224: time=1.014s, peak_mem=2.63GB\
+Step 226: time=0.007s, peak_mem=2.63GB\
+Step 228: time=0.999s, peak_mem=2.63GB\
+Step 230: time=0.994s, peak_mem=2.63GB\
+Step 232: time=0.110s, peak_mem=2.63GB\
+Step 234: time=0.989s, peak_mem=2.63GB\
+Step 236: time=0.006s, peak_mem=2.63GB\
+Step 238: time=0.976s, peak_mem=2.63GB\
+Step 240: time=0.995s, peak_mem=2.63GB\
+Step 242: time=0.984s, peak_mem=2.63GB\
+Step 244: time=0.995s, peak_mem=2.63GB\
+Step 246: time=0.006s, peak_mem=2.63GB\
+Step 248: time=0.991s, peak_mem=2.63GB\
+Step 250: time=0.998s, peak_mem=2.63GB\
+Step 252: time=0.972s, peak_mem=2.63GB\
+Step 254: time=0.978s, peak_mem=2.63GB\
+Step 256: time=0.006s, peak_mem=2.63GB\
+Step 258: time=1.014s, peak_mem=2.63GB\
+Step 260: time=0.113s, peak_mem=2.63GB\
+Step 262: time=0.987s, peak_mem=2.63GB\
+Step 264: time=1.012s, peak_mem=2.63GB\
+Step 266: time=0.003s, peak_mem=2.63GB\
+Step 268: time=0.987s, peak_mem=2.63GB\
+Step 270: time=1.006s, peak_mem=2.63GB\
+Step 272: time=0.997s, peak_mem=2.63GB\
+Step 274: time=0.114s, peak_mem=2.63GB\
+Step 276: time=0.006s, peak_mem=2.63GB\
+Step 278: time=0.991s, peak_mem=2.63GB\
+Step 280: time=0.984s, peak_mem=2.63GB\
+Step 282: time=0.983s, peak_mem=2.63GB\
+Step 284: time=0.999s, peak_mem=2.63GB\
+Step 286: time=0.006s, peak_mem=2.63GB\
+Step 288: time=0.006s, peak_mem=2.63GB\
+Step 290: time=0.992s, peak_mem=2.63GB\
+Step 292: time=0.988s, peak_mem=2.63GB\
+Step 294: time=0.992s, peak_mem=2.63GB\
+Step 296: time=0.006s, peak_mem=2.63GB\
+Step 298: time=0.973s, peak_mem=2.63GB\
+Step 300: time=0.997s, peak_mem=2.63GB\
+Step 302: time=0.107s, peak_mem=2.63GB\
+Step 304: time=0.985s, peak_mem=2.63GB\
+Step 306: time=0.006s, peak_mem=2.63GB\
+Step 308: time=1.003s, peak_mem=2.63GB\
+Step 310: time=0.997s, peak_mem=2.63GB\
+Step 312: time=1.006s, peak_mem=2.63GB\
+Step 314: time=0.984s, peak_mem=2.63GB\
+Step 316: time=0.006s, peak_mem=2.63GB\
+Step 318: time=0.998s, peak_mem=2.63GB\
+Step 320: time=1.000s, peak_mem=2.63GB\
+Step 322: time=0.986s, peak_mem=2.63GB\
+Step 324: time=0.993s, peak_mem=2.63GB\
+Step 326: time=0.006s, peak_mem=2.63GB\
+Step 328: time=0.987s, peak_mem=2.63GB\
+Step 330: time=0.116s, peak_mem=2.63GB\
+Step 332: time=0.982s, peak_mem=2.63GB\
+Step 334: time=1.010s, peak_mem=2.63GB\
+Step 336: time=0.003s, peak_mem=2.63GB\
+Step 338: time=0.991s, peak_mem=2.63GB\
+Step 340: time=0.988s, peak_mem=2.63GB\
+Step 342: time=0.999s, peak_mem=2.63GB\
+Step 344: time=0.111s, peak_mem=2.63GB\
+Step 346: time=0.006s, peak_mem=2.63GB\
+Step 348: time=0.988s, peak_mem=2.63GB\
+Step 350: time=0.999s, peak_mem=2.63GB\
+\
+============================================================\
+avg_step_sec: 0.6763\
+min_step_sec: 0.0027\
+max_step_sec: 1.0909\
+peak_cuda_mem_gb: 2.63\
+METRICS_JSON: \{"avg_step_sec": 0.6763, "min_step_sec": 0.0027, "max_step_sec": 1.0909, "peak_cuda_mem_gb": 2.63\}\
+============================================================\
+\
+Done in 303.72 sec\
+
+\f0\b \cf2 devchatay@epds73cmval2ppf6qhpm
+\f1\b0 \cf3 :
+\f0\b \cf4 ~
+\f1\b0 \cf3 $ }
