@@ -1,0 +1,126 @@
+cat > ~/manifests/torch-training-shared.yaml << 'EOF'
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: torch-training-shared
+  namespace: gpu-lab
+spec:
+  ttlSecondsAfterFinished: 3600
+  backoffLimit: 0
+  template:
+    metadata:
+      labels:
+        app: torch-training
+        mode: shared
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: trainer
+          image: pytorch/pytorch:2.5.1-cuda12.4-cudnn9-runtime
+          imagePullPolicy: IfNotPresent
+          command:
+            - /bin/bash
+            - -c
+            - |
+              set -e
+              echo "Installing dependencies..."
+              pip install --no-cache-dir --quiet transformers==4.40.0 accelerate==0.29.0 datasets==2.19.0
+              
+              echo "Starting training..."
+              python -c "
+              import os, time, json, torch
+              from transformers import AutoTokenizer, AutoModelForCausalLM, TrainingArguments, Trainer, TrainerCallback
+              import torch.utils.data
+
+              step_times, peak_mem_gb = [], 0
+              last_t = None
+
+              def log_gpu_info():
+                  if torch.cuda.is_available():
+                      name = torch.cuda.get_device_name(0)
+                      total_mem = torch.cuda.get_device_properties(0).total_memory / 1024**3
+                      print(f'GPU: {name}')
+                      print(f'TOTAL_GPU_MEMORY_GB: {total_mem:.2f}')
+                      return name, total_mem
+                  return 'Unknown', 0
+
+              class MetricsCallback(TrainerCallback):
+                  def on_step_begin(self, args, state, control, **kwargs):
+                      global last_t
+                      last_t = time.time()
+                      torch.cuda.reset_peak_memory_stats()
+                  def on_step_end(self, args, state, control, **kwargs):
+                      global peak_mem_gb
+                      if last_t:
+                          step_times.append(time.time() - last_t)
+                          peak_mem_gb = max(peak_mem_gb, torch.cuda.max_memory_allocated() / 1024**3)
+                      if state.global_step % 5 == 0:
+                          print(f'Step {state.global_step}: time={step_times[-1]:.3f}s, peak_mem={peak_mem_gb:.2f}GB')
+                  def on_train_end(self, args, state, control, **kwargs):
+                      if step_times:
+                          avg, mn, mx = sum(step_times)/len(step_times), min(step_times), max(step_times)
+                          print('\n' + '='*60)
+                          print(f'avg_step_sec: {avg:.4f}')
+                          print(f'min_step_sec: {mn:.4f}')
+                          print(f'max_step_sec: {mx:.4f}')
+                          print(f'peak_cuda_mem_gb: {peak_mem_gb:.2f}')
+                          print(f'METRICS_JSON: {json.dumps({\"avg_step_sec\":round(avg,4),\"min_step_sec\":round(mn,4),\"max_step_sec\":round(mx,4),\"peak_cuda_mem_gb\":round(peak_mem_gb,2)})}')
+                          print('='*60 + '\n')
+
+              gpu_name, total_mem = log_gpu_info()
+              model_name = 'Qwen/Qwen2.5-0.5B-Instruct'
+              hf_token = os.getenv('HF_TOKEN', '')
+              
+              tokenizer = AutoTokenizer.from_pretrained(model_name, token=hf_token)
+              model = AutoModelForCausalLM.from_pretrained(model_name, token=hf_token).cuda()
+              
+              train_texts = ['MOCK DATASET TEXT FOR MODEL TRAINING' * 5] * 500
+              encodings = tokenizer(train_texts, truncation=True, padding=True, max_length=64)
+
+              class SimpleDataset(torch.utils.data.Dataset):
+                  def __init__(self, enc): self.enc = enc
+                  def __getitem__(self, idx):
+                      item = {k: torch.tensor(v[idx]) for k, v in self.enc.items()}
+                      item['labels'] = item['input_ids'].clone()
+                      item['labels'][item['labels'] == tokenizer.pad_token_id] = -100
+                      return item
+                  def __len__(self): return len(self.enc['input_ids'])
+
+              training_args = TrainingArguments(
+                  output_dir='./results', 
+                  num_train_epochs=3,
+                  per_device_train_batch_size=1,
+                  save_steps=10000, 
+                  logging_steps=5, 
+                  bf16=torch.cuda.is_bf16_supported(), 
+                  report_to='none',
+                  gradient_accumulation_steps=2,
+              )
+              
+              trainer = Trainer(
+                  model=model, args=training_args, train_dataset=SimpleDataset(encodings),
+                  callbacks=[MetricsCallback()]
+              )
+              
+              print('Starting training...')
+              t0 = time.time()
+              trainer.train()
+              print(f'Done in {time.time()-t0:.2f} sec')
+              "
+          env:
+            - name: HF_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: hf-token-secret
+                  key: HF_TOKEN
+                  optional: true
+          resources:
+            limits:
+              cpu: "1"
+              memory: 2Gi
+              nvidia.com/gpu.shared: "1"
+            requests:
+              cpu: "1"
+              memory: 1Gi
+              nvidia.com/gpu.shared: "1"
+EOF
